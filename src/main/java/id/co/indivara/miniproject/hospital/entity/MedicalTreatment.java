@@ -17,11 +17,11 @@ public class MedicalTreatment {
     @Column(name = "medical_treatment_id")
     private Long medicalTreatmentId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "record_treatment_id")
     private RecordTreatment recordTreatment;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "treatment_id")
     private Treatment treatment;
 

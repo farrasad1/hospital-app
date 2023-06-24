@@ -9,6 +9,7 @@ import id.co.indivara.miniproject.hospital.repository.AppointmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,15 @@ public class AppoinmentService extends GenericService<Appointment> {
 
     public List<ResponseAppointmentDoctor> viewAppointmentByDoctorId(Long doctorId) {
         List<Appointment> appointments = appointmentRepository.viewAppointmentByDoctorId(doctorId);
-        List<ResponseAppointmentDoctor> responseAppointmentDoctors = appointments.stream().map(appointment -> new ResponseAppointmentDoctor(appointment.getAppointmentId(), appointment.getSymptoms(), appointment.getDate(), appointment.getPatient().getFullName(), appointment.getPatient().getBloodType())
+        List<ResponseAppointmentDoctor> responseAppointmentDoctors = appointments.stream().map(appointment -> new ResponseAppointmentDoctor(appointment.getAppointmentId(), appointment.getDate(), appointment.getPatient().getFullName(), appointment.getPatient().getBloodType(), appointment.getSymptoms())
+        ).collect(Collectors.toList());
+        return responseAppointmentDoctors;
+    }
+
+    public List<ResponseAppointmentDoctor> viewAppointmentByDocIdAndDate(Long doctorId, Date date) {
+        List<Appointment> appointments = appointmentRepository.viewAppointmentByDocIdAndDate(doctorId, date);
+        List<ResponseAppointmentDoctor> responseAppointmentDoctors = appointments.stream().map(
+                appointment -> new ResponseAppointmentDoctor(appointment.getAppointmentId(), appointment.getDate(), appointment.getPatient().getFullName(), appointment.getPatient().getBloodType(), appointment.getSymptoms())
         ).collect(Collectors.toList());
         return responseAppointmentDoctors;
     }

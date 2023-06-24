@@ -5,21 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseAppointmentDoctor {
-    @JsonProperty("appointment_id")
-    private Long appointmentId;
-    @JsonProperty("date")
-    private Date date;
-    @JsonProperty("full_name")
-    private String fullName;
+public class ResponsePatientList {
+    @JsonProperty("patient_id")
+    private Long patientId;
+    @JsonProperty("nik")
+    private Long nik;
+    @JsonProperty("gender")
+    private String gender;
     @JsonProperty("blood_type")
     private String bloodType;
-    @JsonProperty("symptoms")
-    private String symptoms;
 }

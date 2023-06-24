@@ -1,5 +1,6 @@
 package id.co.indivara.miniproject.hospital.controller;
 
+import id.co.indivara.miniproject.hospital.dto.response.ResponsePatientList;
 import id.co.indivara.miniproject.hospital.entity.Patient;
 import id.co.indivara.miniproject.hospital.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class PatientController {
     }
 
     @GetMapping("/patients")
-    List<Patient> fetchPatientList() {
-        return patientService.findAll();
+    public List<ResponsePatientList> getPatientList(){
+        return patientService.viewPatientList();
     }
 
     @GetMapping("/patients/{id}")

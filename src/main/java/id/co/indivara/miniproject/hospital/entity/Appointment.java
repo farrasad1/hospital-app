@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "trx_appointment")
@@ -30,7 +30,7 @@ public class Appointment {
     private Doctor doctor;
 
     private String symptoms;
-    private Date date = new Date();
+    private Date date;
 
     @Column(name = "start_time")
     private Long startTime;
