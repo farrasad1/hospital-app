@@ -20,7 +20,7 @@ public class TreatmentController {
     }
 
     @GetMapping("/treatments")
-    List<ResponseTreatmentList> getTreatmentList() {
+    public List<ResponseTreatmentList> viewTreatmentList() {
         return treatmentService.viewTreatmentList();
     }
 

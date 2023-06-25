@@ -10,7 +10,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.servlet.Filter;
 
 @Configuration
 @EnableWebSecurity
@@ -25,6 +24,20 @@ public class SecurityConfiguration {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
+                .antMatchers("/api/auth/").permitAll()
+                .antMatchers("/v2/").permitAll()
+                .antMatchers("/webjars/").permitAll()
+                .antMatchers("/api/v1/auth/").permitAll()
+                .antMatchers("/v2/api-docs").permitAll()
+                .antMatchers("/v3/api-docs").permitAll()
+                .antMatchers("/v3/api-docs/").permitAll()
+                .antMatchers("/swagger-resources").permitAll()
+                .antMatchers("/swagger-resources/").permitAll()
+                .antMatchers("/configuration/ui").permitAll()
+                .antMatchers("/configuration/security").permitAll()
+                .antMatchers("/swagger-ui/").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/webjars/").permitAll()
                 .antMatchers("/hospital/addresses/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/hospital/specialization/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/hospital/doctors/**").hasAnyAuthority("ADMIN")
