@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "trx_appointment")
@@ -33,10 +34,7 @@ public class Appointment {
     private Date date;
 
     @Column(name = "start_time")
-    private Long startTime;
-
-    @Column(name = "end_time")
-    private Long endTime;
+    private Timestamp startTime;
 
     @Column(name = "appointment_status")
     private Boolean appointmentStatus;

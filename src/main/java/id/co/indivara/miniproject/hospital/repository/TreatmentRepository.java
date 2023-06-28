@@ -8,6 +8,4 @@ import java.util.List;
 
 @Repository
 public interface TreatmentRepository extends GenericRepository<Treatment>{
-    @Query(value = "SELECT * FROM mst_treatments", nativeQuery = true)
-    List<Treatment> viewTreatmentList();
 }

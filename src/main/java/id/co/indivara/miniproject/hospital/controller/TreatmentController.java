@@ -4,6 +4,8 @@ import id.co.indivara.miniproject.hospital.dto.response.ResponseTreatmentList;
 import id.co.indivara.miniproject.hospital.entity.Treatment;
 import id.co.indivara.miniproject.hospital.service.TreatmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,28 +17,28 @@ public class TreatmentController {
     private TreatmentService treatmentService;
 
     @PostMapping("/treatments")
-    Treatment saveTreatment(@RequestBody Treatment treatment){
-        return treatmentService.saveData(treatment);
+    public ResponseEntity<Treatment> saveTreatment(@RequestBody Treatment treatment) {
+        return new ResponseEntity<>(treatmentService.saveData(treatment), HttpStatus.CREATED);
     }
 
     @GetMapping("/treatments")
-    public List<ResponseTreatmentList> viewTreatmentList() {
-        return treatmentService.viewTreatmentList();
+    public ResponseEntity<List<ResponseTreatmentList>> viewTreatmentList() {
+        return new ResponseEntity<>(treatmentService.viewTreatmentList(), HttpStatus.OK);
     }
 
     @GetMapping("/treatments/{id}")
-    Treatment findById (@PathVariable("id") Long treatmentId) {
-        return treatmentService.findById(treatmentId);
+    public ResponseEntity<Treatment> findById(@PathVariable("id") Long treatmentId) {
+        return new ResponseEntity<>(treatmentService.findById(treatmentId), HttpStatus.OK);
     }
 
-    @PatchMapping ("/treatments/{id}")
-    Treatment updateTreatment(@RequestBody Treatment treatment, @PathVariable("id") Long treatmentId){
-        return treatmentService.updateData(treatmentId, treatment);
+    @PutMapping("/treatments/{id}")
+    public ResponseEntity<Treatment> updateTreatment(@RequestBody Treatment treatment, @PathVariable("id") Long treatmentId) {
+        return new ResponseEntity<>(treatmentService.updateData(treatmentId, treatment), HttpStatus.OK);
     }
 
-    @DeleteMapping ("/treatments/{id}")
-    public String deleteTreatment(@PathVariable("id") Long treatmentId){
+    @DeleteMapping("/treatments/{id}")
+    public ResponseEntity<HttpStatus> deleteTreatment(@PathVariable("id") Long treatmentId) {
         treatmentService.deletebyId(treatmentId);
-        return "Delete sukses";
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

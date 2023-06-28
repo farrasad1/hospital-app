@@ -1,5 +1,6 @@
 package id.co.indivara.miniproject.hospital.entity;
 
+import id.co.indivara.miniproject.hospital.enumeration.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -120,14 +120,14 @@ public class TreatmentTests {
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(MapperConvertion.toJson(treatment))
-                ).andDo(result -> {
-                    Treatment treatments = MapperConvertion.getData(result.getResponse().getContentAsString(), Treatment.class);
-                    Assertions.assertNotNull(treatments);
-                    Assertions.assertEquals(treatments.getTreatmentName(),treatment.getTreatmentName());
-                })
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.treatmentId").isNotEmpty());
+        ).andDo(result -> {
+            Treatment treatments = MapperConvertion.getData(result.getResponse().getContentAsString(), Treatment.class);
+            Assertions.assertNotNull(treatments);
+            Assertions.assertEquals(treatments.getTreatmentName(),treatment.getTreatmentName());
+        })
+        .andExpect(status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.treatmentId").isNotEmpty());
     }
 
     @Test

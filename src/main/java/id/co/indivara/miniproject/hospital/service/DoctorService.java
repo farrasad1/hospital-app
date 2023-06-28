@@ -28,7 +28,7 @@ public class DoctorService extends GenericService<Doctor> {
     }
 
     public List<ResponseDoctorList> viewDoctorList() {
-        List<Doctor> doctors = doctorRepository.viewDoctorList();
+        List<Doctor> doctors = doctorRepository.findAll();
         List<ResponseDoctorList> responseDoctorList = doctors.stream().map(
                 doctor -> new ResponseDoctorList(doctor.getDoctorId(), doctor.getRegistrationNumber(), doctor.getGender(), doctor.getSpecialization().getSpecializationId())
         ).collect(Collectors.toList());

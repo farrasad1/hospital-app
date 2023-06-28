@@ -10,13 +10,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
 @Service
 @RequiredArgsConstructor
-public class AppoinmentService extends GenericService<Appointment> {
+public class AppointmentService extends GenericService<Appointment> {
     private final AppointmentRepository appointmentRepository;
     private final DoctorService doctorService;
     private final PatientService patientService;
@@ -30,21 +32,31 @@ public class AppoinmentService extends GenericService<Appointment> {
         appointment.setPatient(patient);
         recordTreatment.setAppointment(appointment);
         appointment.setRecordTreatment(recordTreatment);
+        appointment.setStartTime(Timestamp.valueOf(LocalDateTime.now()));
         return appointmentRepository.save(appointment);
     }
 
     public List<ResponseAppointmentDoctor> viewAppointmentByDoctorId(Long doctorId) {
-        List<Appointment> appointments = appointmentRepository.viewAppointmentByDoctorId(doctorId);
-        List<ResponseAppointmentDoctor> responseAppointmentDoctors = appointments.stream().map(appointment -> new ResponseAppointmentDoctor(appointment.getAppointmentId(), appointment.getDate(), appointment.getPatient().getFullName(), appointment.getPatient().getBloodType(), appointment.getSymptoms())
+        List<Appointment> appointments = appointmentRepository.findByDoctorDoctorId(doctorId);
+        return appointments.stream().map(
+                appointment -> new ResponseAppointmentDoctor(
+                        appointment.getAppointmentId(),
+                        appointment.getDate(),
+                        appointment.getPatient().getFullName(),
+                        appointment.getPatient().getBloodType(),
+                        appointment.getSymptoms())
         ).collect(Collectors.toList());
-        return responseAppointmentDoctors;
     }
 
     public List<ResponseAppointmentDoctor> viewAppointmentByDocIdAndDate(Long doctorId, Date date) {
-        List<Appointment> appointments = appointmentRepository.viewAppointmentByDocIdAndDate(doctorId, date);
-        List<ResponseAppointmentDoctor> responseAppointmentDoctors = appointments.stream().map(
-                appointment -> new ResponseAppointmentDoctor(appointment.getAppointmentId(), appointment.getDate(), appointment.getPatient().getFullName(), appointment.getPatient().getBloodType(), appointment.getSymptoms())
+        List<Appointment> appointments = appointmentRepository.findByDoctorDoctorIdAndDate(doctorId, date);
+        return appointments.stream().map(
+                appointment -> new ResponseAppointmentDoctor(
+                        appointment.getAppointmentId(),
+                        appointment.getDate(),
+                        appointment.getPatient().getFullName(),
+                        appointment.getPatient().getBloodType(),
+                        appointment.getSymptoms())
         ).collect(Collectors.toList());
-        return responseAppointmentDoctors;
     }
 }

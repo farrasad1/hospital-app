@@ -9,9 +9,11 @@ import java.util.List;
 
 @Repository
 public interface MedicalTreatmentRepository extends GenericRepository<MedicalTreatment>{
-    @Query(value = "SELECT * FROM trx_medical_treatment a " +
-            "JOIN trx_record_treatment b ON a.record_treatment_id = b.record_treatment_id "+
-            "JOIN trx_appointment c ON b.appointment_id = c.appointment_id "+
-            "WHERE c.patient_id = :patientId ", nativeQuery = true)
-    List<MedicalTreatment> viewMedicalRecord(@Param("patientId") Long patientId);
+//    @Query(value = "SELECT * FROM MedicalTreatment a " +
+//            "JOIN RecordTreatment b ON a.recordTreatment.recordTreatmentId = b.recordTreatmentId "+
+//            "JOIN Appointment c ON b.appointment.appointmentId = c.appointmentId "+
+//            "WHERE c.patient.patientId = :patientId")
+//    List<MedicalTreatment> viewMedicalRecord(@Param("patientId") Long patientId);
+
+    List<MedicalTreatment> findRecordTreatmentAppointmentPatientPatientId(Long patientId);
 }

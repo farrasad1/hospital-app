@@ -4,6 +4,8 @@ import id.co.indivara.miniproject.hospital.entity.RecordTreatment;
 import id.co.indivara.miniproject.hospital.entity.Treatment;
 import id.co.indivara.miniproject.hospital.service.RecordTreatmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +18,7 @@ public class RecordTreatmentController {
     private RecordTreatmentService recordTreatmentService;
 
     @PostMapping("/record-treatment")
-    RecordTreatment saveRecordTreatment(@RequestBody RecordTreatment recordTreatment){
-        return recordTreatmentService.saveData(recordTreatment);
+    public ResponseEntity<RecordTreatment> saveRecordTreatment(@RequestBody RecordTreatment recordTreatment){
+        return new ResponseEntity<>(recordTreatmentService.saveData(recordTreatment), HttpStatus.CREATED);
     }
 }

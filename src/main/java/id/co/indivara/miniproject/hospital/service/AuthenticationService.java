@@ -3,7 +3,7 @@ package id.co.indivara.miniproject.hospital.service;
 import id.co.indivara.miniproject.hospital.dto.response.ResponseAuthenticationRequest;
 import id.co.indivara.miniproject.hospital.dto.response.ResponseRegisterRequest;
 import id.co.indivara.miniproject.hospital.dto.response.ResponseAuthentication;
-import id.co.indivara.miniproject.hospital.entity.Role;
+import id.co.indivara.miniproject.hospital.enumeration.Role;
 import id.co.indivara.miniproject.hospital.entity.User;
 import id.co.indivara.miniproject.hospital.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

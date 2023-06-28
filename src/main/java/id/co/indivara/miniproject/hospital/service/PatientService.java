@@ -24,7 +24,7 @@ public class PatientService extends GenericService<Patient>{
     }
 
     public List<ResponsePatientList> viewPatientList(){
-        List<Patient> patients = patientRepository.viewPatientList();
+        List<Patient> patients = patientRepository.findAll();
         List<ResponsePatientList> responsePatientList = patients.stream().map(
                 patient -> new ResponsePatientList(patient.getPatientId(), patient.getNik(), patient.getGender(), patient.getBloodType())
         ).collect(Collectors.toList());

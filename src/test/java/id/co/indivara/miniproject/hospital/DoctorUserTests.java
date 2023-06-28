@@ -1,13 +1,12 @@
 package id.co.indivara.miniproject.hospital;
 
-import id.co.indivara.miniproject.hospital.controller.AppoinmentController;
+import id.co.indivara.miniproject.hospital.controller.AppointmentController;
 import id.co.indivara.miniproject.hospital.controller.AuthenticationController;
 import id.co.indivara.miniproject.hospital.dto.response.ResponseAppointmentDoctor;
 import id.co.indivara.miniproject.hospital.dto.response.ResponseAuthentication;
 import id.co.indivara.miniproject.hospital.dto.response.ResponseAuthenticationRequest;
-import id.co.indivara.miniproject.hospital.entity.Appointment;
 import id.co.indivara.miniproject.hospital.repository.AppointmentRepository;
-import id.co.indivara.miniproject.hospital.service.AppoinmentService;
+import id.co.indivara.miniproject.hospital.service.AppointmentService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,11 +31,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @RunWith(SpringRunner.class)
 public class DoctorUserTests {
     @Autowired
-    private AppoinmentController appoinmentController;
+    private AppointmentController appointmentController;
     @Autowired
     private AppointmentRepository appointmentRepository;
     @Autowired
-    private AppoinmentService appoinmentService;
+    private AppointmentService appointmentService;
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -50,9 +49,10 @@ public class DoctorUserTests {
         jwt = Objects.requireNonNull(response.getBody()).getToken();
     }
 
+    //TES MELIHAT APPOINTMENT PASIEN BEDASARKAN DOKTER ID
     @Test
     public void getAppointmentByDoctorIdTest() throws Exception{
-        List<ResponseAppointmentDoctor> responseAppointmentDoctors = appoinmentService.viewAppointmentByDoctorId(1L);
+        List<ResponseAppointmentDoctor> responseAppointmentDoctors = appointmentService.viewAppointmentByDoctorId(1L);
         System.out.println(jwt);
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/hospital/appointment/1")
@@ -63,9 +63,10 @@ public class DoctorUserTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].appointment_id").isNotEmpty());
     }
 
+    //TES MELIHAT APPOINTMENT PASIEN BEDASARKAN DOCTOR ID DAN TANGGAL APPOINTMENT
     @Test
     public void getAppointmentByDocIdAndDateTest() throws Exception{
-        List<ResponseAppointmentDoctor> responseAppointmentDoctors = appoinmentService.viewAppointmentByDocIdAndDate(1L,  Date.valueOf("2023-06-22"));
+        List<ResponseAppointmentDoctor> responseAppointmentDoctors = appointmentService.viewAppointmentByDocIdAndDate(1L,  Date.valueOf("2023-06-22"));
         System.out.println(jwt);
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/hospital/appointment/1?date=2023-06-22")
@@ -75,4 +76,7 @@ public class DoctorUserTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].appointment_id").isNotEmpty());
     }
+
+    //TES MEDICAL RECORD
+
 }

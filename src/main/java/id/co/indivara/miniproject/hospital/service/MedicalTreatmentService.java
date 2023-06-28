@@ -28,7 +28,7 @@ public class MedicalTreatmentService extends GenericService<MedicalTreatment>{
     }
 
     public List<ResponseMedicalRecord> viewMedicalRecord(Long patientId){
-        List<MedicalTreatment> medicalTreatments = medicalTreatmentRepository.viewMedicalRecord(patientId);
+        List<MedicalTreatment> medicalTreatments = medicalTreatmentRepository.findRecordTreatmentAppointmentPatientPatientId(patientId);
         List<ResponseMedicalRecord> responseMedicalRecord = medicalTreatments.stream().map(
                 medicalTreatment -> new ResponseMedicalRecord(
                         medicalTreatment.getRecordTreatment().getRecordTreatmentId(),
